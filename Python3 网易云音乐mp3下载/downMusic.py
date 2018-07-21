@@ -23,12 +23,12 @@ class HttpSvc():
 				print('***** ' + x['name'] + '.mp3 ***** Downloading...')
 				url = 'http://music.163.com/song/media/outer/url?id=' + x['id'] + '.mp3'
 				try:
-					urllib.request.urlretrieve(url,'d:/music/' + x['name'] + '.mp3')
+					urllib.request.urlretrieve(url,'d:/music/' + x['name'].replace('/','') + '.mp3')
 					downNum = downNum + 1
 				except:
 					x = x - 1
 					print('Download wrong~')
-		print('Download complete ' + str(downNum) + 'files !')
+		print('Download complete ' + str(downNum) + ' files !')
 		pass
 
 	def getMusicData(self,url):
@@ -49,6 +49,6 @@ class HttpSvc():
 if __name__ == '__main__':
 
 	newHttp = HttpSvc()
-	musicData = newHttp.getMusicData('https://music.163.com/playlist?id=632061035') #获取歌单歌曲id https://music.163.com/playlist?id=2074950566
+	musicData = newHttp.getMusicData('https://music.163.com/playlist?id=2074950566') #获取歌单歌曲id https://music.163.com/playlist?id=2074950566
 	print(musicData)
 	print(newHttp.get(musicData))
