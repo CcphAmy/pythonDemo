@@ -4,6 +4,8 @@ import os
 
 from bs4 import BeautifulSoup
 
+
+
 class HttpSvc():
 	"""docstring for HttpSvc"""
 
@@ -11,7 +13,7 @@ class HttpSvc():
 		super(HttpSvc, self).__init__()
 		if not os.path.exists("d:/music"):
 			os.mkdir('d:/music')
-		
+
 	def get(self,values):
 
 		print(len(values))
@@ -35,10 +37,13 @@ class HttpSvc():
 
 		user_agent = 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36'
 		headers    = {'User-Agent':user_agent}
+
 		webData    = requests.get(url,headers=headers).text
 		soup       = BeautifulSoup(webData,'lxml')
-
 		find_list  = soup.find('ul',class_="f-hide").find_all('a')
+
+
+		
 		tempArr = []
 		for a in find_list:
 			music_id  = a['href'].replace('/song?id=','')
