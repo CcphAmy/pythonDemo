@@ -12,36 +12,48 @@ class GanJi():
         super(GanJi, self).__init__()
 
     def get(self,url):
-        # 32 
+
         user_agent = 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36'
         headers    = {'User-Agent':user_agent}
         
-        webData    = requests.get(url,headers=headers).text
+        webData    = requests.get(url + 'o1',headers=headers).text
         soup       = BeautifulSoup(webData,'lxml')
-        sum        = soup.find('span',class_="num").text.replace("Ì×","")
-        print(int(sum) / 32)
         
+        
+        sum        = soup.find('span',class_="num").text.replace("å¥—","")
+        ave        = int(sum) / 32
+        forNum     = int(ave)
 
-        find_list  = soup.find('div',class_="f-main-list").find_all('dl')
+        if forNum < ave:
+            forNum = forNum + 1
 
-        for dl in find_list:
-            # Ãû³Æ
-            print(dl.find('a',class_="js-title value title-font").text,end='|')
 
-            # ÖÐ¼ä 5 ¸öÐÅÏ¢
-            tempDD = dl.find('dd',class_="dd-item size").find_all('span')
-            for tempSpan in tempDD:
-                if not tempSpan.text == '' : 
-                    print(tempSpan.text.replace("\n", ""),end='|')
+        for x in range(forNum):
+            webData    = requests.get(url + 'o' + str(x + 1),headers=headers).text
+            soup       = BeautifulSoup(webData,'lxml')
+            find_list  = soup.find('div',class_="f-main-list").find_all('div',class_="f-list-item ershoufang-list")
 
-            # µØÖ·
-            print(dl.find('span',class_="area").text.replace(" ","").replace("\n",""),end='|')
-            # ¼ÛÇ®
-            print(dl.find('div',class_="price").text.replace(" ","").replace("\n",""),end='|')
-            # Æ½¾ù
-            print(dl.find('div',class_="time").text.replace(" ","").replace("\n",""))
+            for dl in find_list:
+                
+                print(dl.find('a',class_="js-title value title-font").text,end='|') # åç§°
 
+                # ä¸­é—´ 5 ä¸ªä¿¡æ¯
+                tempDD = dl.find('dd',class_="dd-item size").find_all('span')
+                for tempSpan in tempDD:
+                    if not tempSpan.text == '' : 
+                        print(tempSpan.text.replace("\n", ""),end='|')
+
+                
+                print(dl.find('span',class_="area").text.replace(" ","").replace("\n",""),end='|') # åœ°å€
+                
+                print(dl.find('div',class_="price").text.replace(" ","").replace("\n",""),end='|') # ä»·é’±
+                
+                print(dl.find('div',class_="time").text.replace(" ","").replace("\n",""),end="|") # å¹³å‡
+                
+                print("http://chaozhou.ganji.com" + dl['href'],end="|") # åœ°å€
+
+                print(str(x + 1))
 
 if __name__ == '__main__':
     temp = GanJi()
-    temp.get("http://chaozhou.ganji.com/fang5/xiangqiao/o1")
+    temp.get("http://chaozhou.ganji.com/fang5/xiangqiao/")
