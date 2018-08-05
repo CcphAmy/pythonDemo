@@ -30,8 +30,17 @@ class BaiduMap(object):
 		except Exception as e:
 			raise
 
-	def getMapData(cityId,info_):
-		pass
+	def getMapData(cityId,info_): 
+
+        qt           = "s" #s and cen
+        rn           = "10"
+        modNum       = "10"
+        loopValue    = 1
+
+        if cityId < 0 :
+            return -1
+
+
 
 if __name__ == '__main__':
 	BaiduMap.getCityData("潮州");
