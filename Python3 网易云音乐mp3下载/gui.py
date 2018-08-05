@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 class MyFrame1 (threading.Thread,wx.Frame):
 	musicData = []
 	def __init__( self, threadID, name ,counter):
-		wx.Frame.__init__ ( self, None, id = wx.ID_ANY, title = u"网易云音乐歌曲批量下载(www.52pojie.cn)", pos = wx.DefaultPosition, size = wx.Size( 450,409 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, None, id = wx.ID_ANY, title = u"网易云音乐歌曲批量下载", pos = wx.DefaultPosition, size = wx.Size( 450,409 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 		self.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_WINDOW ) )
@@ -42,13 +42,11 @@ class MyFrame1 (threading.Thread,wx.Frame):
 		self.output_text = wx.TextCtrl( self, wx.ID_ANY, u" \
 网易云音乐歌单下载，网页中复制URL\n \
 https://music.163.com/#/playlist?id=xxxxxxxxxx\n \
-保存目录：D:\music\n \
+保存目录：D:\\music\n \
 线程只能执行一次，下载后如需重新下载其他需要重启\n \
 可多开下载同个歌单或者不同歌单\n \
 -------------------------------------------------------\n \
-支持歌单和排名榜 - 吾爱破解论坛\n \
-核心python代码：\n \
-https://www.52pojie.cn/thread-768186-1-1.html\n \
+支持歌单和排名榜 - ccphamy\n \
 -------------------------------------------------------\n" \
 			, wx.DefaultPosition, wx.Size( 450,320 ), wx.TE_MULTILINE )
 
