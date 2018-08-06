@@ -9,7 +9,7 @@ class BaiduMap(object):
 		super(BaiduMap, self).__init__()
 
 	#城市获取数据
-	def getCityData(cityName):
+	def getCityData(self,cityName):
 		# http://map.baidu.com/?newmap=1&qt=cur&ie=utf-8&wd=  &oue=1&res=jc
 		try:
 			webData = requests.get("http://map.baidu.com/?newmap=1&qt=cur&ie=utf-8&wd=" + cityName + "&oue=1&res=jc").text
@@ -30,17 +30,20 @@ class BaiduMap(object):
 		except Exception as e:
 			raise
 
-	def getMapData(cityId,info_): 
+	def getMapData(self,cityId,info_): 
 
-        qt           = "s" #s and cen
-        rn           = "10"
-        modNum       = "10"
-        loopValue    = 1
+		qt        = "s"
+		rn        = "10"
+		modNum    = "10"
+		loopValue = 1
 
-        if cityId < 0 :
-            return -1
+		if cityId < 0 :
+			return -1
 
-
+		getUrl = "http://api.map.baidu.com/?qt=" + qt + "&c=" + str(cityId) + "&wd=" + info_ + "&rn=" + rn + "&pn=1" + "&ie=utf-8&oue=1&fromproduct=jsapi&res=api&callback=BMap._rd._cbk7303&ak=E4805d16520de693a3fe707cdc962045";
+		webData = requests.get(getUrl).text
+		print(webData)
 
 if __name__ == '__main__':
-	BaiduMap.getCityData("潮州");
+	obj = BaiduMap()
+	obj.getMapData(obj.getCityData("潮州"),"酒店")
