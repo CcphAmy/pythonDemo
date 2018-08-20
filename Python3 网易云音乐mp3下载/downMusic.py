@@ -4,7 +4,9 @@ import os
 
 from bs4 import BeautifulSoup
 
-
+'''
+此项目已转移置 https://github.com/CcphAmy/NetEaseCloudMusic-nonmembership-list-download
+'''
 
 class HttpSvc():
 	"""docstring for HttpSvc"""

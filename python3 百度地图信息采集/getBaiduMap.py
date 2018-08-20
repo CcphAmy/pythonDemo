@@ -1,7 +1,12 @@
 import requests
 import os
+import re
 import json
 from bs4 import BeautifulSoup
+
+'''
+此项目已转移置 https://github.com/CcphAmy/BaiduMap-webcrawler-information
+'''
 
 class BaiduMap(object):
 	"""docstring for BaiduMap"""
@@ -40,9 +45,14 @@ class BaiduMap(object):
 		if cityId < 0 :
 			return -1
 
-		getUrl = "http://api.map.baidu.com/?qt=" + qt + "&c=" + str(cityId) + "&wd=" + info_ + "&rn=" + rn + "&pn=1" + "&ie=utf-8&oue=1&fromproduct=jsapi&res=api&callback=BMap._rd._cbk7303&ak=E4805d16520de693a3fe707cdc962045";
-		webData = requests.get(getUrl).text
-		print(webData)
+		getUrl   = "http://api.map.baidu.com/?qt=" + qt + "&c=" + str(cityId) + "&wd=" + info_ + "&rn=" + rn + "&pn=1" + "&ie=utf-8&oue=1&fromproduct=jsapi&res=api&callback=BMap._rd._cbk7303&ak=E4805d16520de693a3fe707cdc962045";
+		webData  = requests.get(getUrl).text
+		# print(webData)
+		loopNum = re.search("\"total\":([\\s\\S]*?),",webData).group(1) #数量
+		reJson = re.search("content\":([\\s\\S]*?),\"current_city",webData).group(1)
+		print(loopNum)
+		jsonData = json.loads(reJson)
+		print(jsonData)
 
 if __name__ == '__main__':
 	obj = BaiduMap()
