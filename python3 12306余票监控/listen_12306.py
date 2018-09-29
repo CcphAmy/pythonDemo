@@ -26,10 +26,10 @@ class tl12306:
                         if "|" + cs+"|" in r:
                             if r.split('|')[-7] != '无': #二等座
                                 str1 = str1 + cs + ',有票啦~~\n'
-                if str:
-                    pass
-                print(str1)
-                self.send_mail(str1)
+                if len(str1)>5:
+                    print(str1)
+                    self.send_mail(str1)
+
 
                 sys.stdout.write('\r')
                 sys.stdout.write('已查询%d次~' % self.num)
@@ -66,4 +66,4 @@ if __name__ == '__main__':
     print('监控中~')
     while True:
         c.getlist()
-        time.sleep(c.input_second())
+        time.sleep(randint(5,10))
